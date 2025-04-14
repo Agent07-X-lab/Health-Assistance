@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: 34, 197, 94;  /* Green */
+    --color-secondary: 255, 153, 0;  /* Orange */
+    --color-accent: 255, 0, 0;  /* Red */
+  }
+
+  body {
+    @apply bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold font-['Poppins'];
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-2.5 border border-transparent 
+           text-sm font-medium rounded-lg text-white bg-primary-600 
+           hover:bg-primary-700 focus:outline-none focus:ring-2 
+           focus:ring-offset-2 focus:ring-primary-500 
+           disabled:opacity-50 disabled:cursor-not-allowed 
+           transition-colors duration-200;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-2.5 border border-transparent 
+           text-sm font-medium rounded-lg text-white bg-secondary-600 
+           hover:bg-secondary-700 focus:outline-none focus:ring-2 
+           focus:ring-offset-2 focus:ring-secondary-500 
+           disabled:opacity-50 disabled:cursor-not-allowed 
+           transition-colors duration-200;
+  }
+
+  .btn-accent {
+    @apply inline-flex items-center justify-center px-6 py-2.5 border border-transparent 
+           text-sm font-medium rounded-lg text-white bg-accent-600 
+           hover:bg-accent-700 focus:outline-none focus:ring-2 
+           focus:ring-offset-2 focus:ring-accent-500 
+           disabled:opacity-50 disabled:cursor-not-allowed 
+           transition-colors duration-200;
+  }
+
+  .card {
+    @apply bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 
+           hover:shadow-xl transition-shadow duration-200
+           flex flex-col items-center text-center;
+  }
+
+  .input {
+    @apply w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600
+           focus:ring-2 focus:ring-primary-500 focus:border-primary-500 
+           dark:focus:ring-primary-400 dark:focus:border-primary-400
+           bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100
+           placeholder-gray-500 dark:placeholder-gray-400
+           disabled:opacity-50 disabled:cursor-not-allowed
+           transition-colors duration-200;
+  }
+
+  .label {
+    @apply block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1;
+  }
+}
