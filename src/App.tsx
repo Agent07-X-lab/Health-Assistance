@@ -20,6 +20,7 @@ import WearableDeviceDashboard from './components/WearableDeviceDashboard';
 import EmergencyAlertSystem from './components/EmergencyAlertSystem';
 import AppointmentSystem from './components/AppointmentSystem';
 import MedicationReminder from './components/MedicationReminder';
+import VideoConsultation from './components/VideoConsultation';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { ThemeProvider, useTheme } from './contexts/ThemeContext';
 
@@ -242,6 +243,7 @@ function AppContent() {
           <Route path="/appointments" element={<AppointmentSystem />} />
           <Route path="/medications" element={<MedicationReminder />} />
           <Route path="/emergency-alerts" element={<EmergencyAlertSystem />} />
+          <Route path="/video-consultation" element={<VideoConsultation />} />
           
           {/* Legacy Routes */}
           <Route path="/services/*" element={<Services />} />
