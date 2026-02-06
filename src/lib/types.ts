@@ -249,3 +249,278 @@ export interface PatientPredictiveAnalysis {
   created_at: string;
   updated_at: string;
 }
+
+// New Advanced Feature Types
+
+export type UserRole = 'patient' | 'doctor' | 'admin';
+
+export interface UserRoleData {
+  id: string;
+  user_id: string;
+  role: UserRole;
+  created_at: string;
+}
+
+export interface SymptomCheckerMessage {
+  role: 'user' | 'assistant';
+  content: string;
+  timestamp: string;
+}
+
+export interface SymptomCheckerHistory {
+  id: string;
+  user_id: string;
+  symptoms: string[];
+  predicted_conditions: Array<{
+    name: string;
+    probability: number;
+    description: string;
+  }>;
+  urgency_level: 'Low' | 'Medium' | 'High';
+  chat_history: SymptomCheckerMessage[];
+  created_at: string;
+}
+
+export interface HealthRiskScore {
+  id: string;
+  patient_id: string;
+  heart_disease_risk: number;
+  diabetes_risk: number;
+  hypertension_risk: number;
+  overall_risk_score: number;
+  vitals_data: {
+    blood_pressure: { systolic: number; diastolic: number };
+    blood_sugar: number;
+    bmi: number;
+    heart_rate: number;
+    age: number;
+    cholesterol?: number;
+  };
+  calculated_at: string;
+  created_at: string;
+}
+
+export interface WearableData {
+  id: string;
+  user_id: string;
+  steps: number;
+  heart_rate: number;
+  sleep_hours: number;
+  calories_burned: number;
+  distance_km: number;
+  active_minutes: number;
+  recorded_at: string;
+  created_at: string;
+}
+
+export interface EmergencyAlert {
+  id: string;
+  patient_id: string;
+  alert_type: string;
+  severity: 'Low' | 'Medium' | 'High' | 'Critical';
+  vitals_snapshot: any;
+  message: string;
+  status: 'active' | 'acknowledged' | 'resolved';
+  acknowledged_by?: string;
+  acknowledged_at?: string;
+  resolved_at?: string;
+  created_at: string;
+}
+
+export interface EHRRecord {
+  id: string;
+  patient_id: string;
+  record_type: 'diagnosis' | 'lab_report' | 'prescription' | 'procedure' | 'note';
+  title: string;
+  description?: string;
+  diagnosis?: string;
+  doctor_id?: string;
+  document_url?: string;
+  metadata?: any;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface AIPrescription {
+  id: string;
+  patient_id: string;
+  doctor_id: string;
+  diagnosis: string;
+  suggested_medicines: Array<{
+    name: string;
+    generic_name: string;
+    dosage: string;
+    frequency: string;
+    duration: string;
+    cost_range: string;
+  }>;
+  drug_interactions?: Array<{
+    drug1: string;
+    drug2: string;
+    severity: 'mild' | 'moderate' | 'severe';
+    description: string;
+  }>;
+  dosage_recommendations: any;
+  notes?: string;
+  status: 'draft' | 'finalized' | 'dispensed';
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Appointment {
+  id: string;
+  patient_id: string;
+  doctor_id: string;
+  appointment_date: string;
+  appointment_time: string;
+  duration_minutes: number;
+  status: 'booked' | 'confirmed' | 'cancelled' | 'completed' | 'no_show';
+  appointment_type: 'consultation' | 'follow_up' | 'emergency' | 'video_call';
+  symptoms?: string[];
+  notes?: string;
+  reminder_sent: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface VideoConsultation {
+  id: string;
+  appointment_id: string;
+  session_id: string;
+  patient_id: string;
+  doctor_id: string;
+  started_at?: string;
+  ended_at?: string;
+  duration_minutes?: number;
+  prescription_notes?: string;
+  chat_transcript?: Array<{
+    sender: string;
+    message: string;
+    timestamp: string;
+  }>;
+  status: 'scheduled' | 'in_progress' | 'completed' | 'cancelled';
+  created_at: string;
+}
+
+export interface DietPlan {
+  id: string;
+  patient_id: string;
+  plan_name: string;
+  target_condition?: string;
+  daily_calories: number;
+  meal_plan: {
+    [day: string]: {
+      breakfast: { items: string[]; calories: number };
+      lunch: { items: string[]; calories: number };
+      dinner: { items: string[]; calories: number };
+      snacks: { items: string[]; calories: number };
+    };
+  };
+  dietary_restrictions: string[];
+  start_date: string;
+  end_date?: string;
+  status: 'active' | 'completed' | 'cancelled';
+  created_by?: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ActivityPlan {
+  id: string;
+  patient_id: string;
+  plan_name: string;
+  activity_type: string;
+  exercises: Array<{
+    name: string;
+    description: string;
+    duration_minutes: number;
+    sets?: number;
+    reps?: number;
+    calories_burned: number;
+  }>;
+  frequency_per_week: number;
+  duration_minutes: number;
+  intensity_level: 'low' | 'moderate' | 'high';
+  start_date: string;
+  end_date?: string;
+  completion_tracking: Array<{
+    date: string;
+    completed: boolean;
+    notes?: string;
+  }>;
+  status: 'active' | 'completed' | 'paused';
+  created_at: string;
+  updated_at: string;
+}
+
+export interface MedicationReminder {
+  id: string;
+  patient_id: string;
+  medication_name: string;
+  dosage: string;
+  frequency: string;
+  times_per_day: number;
+  reminder_times: string[];
+  start_date: string;
+  end_date?: string;
+  instructions?: string;
+  taken_log: Array<{
+    date: string;
+    time: string;
+    taken: boolean;
+    notes?: string;
+  }>;
+  status: 'active' | 'completed' | 'paused';
+  created_at: string;
+  updated_at: string;
+}
+
+export interface EnvironmentalHealthData {
+  id: string;
+  location: string;
+  air_quality_index: number;
+  pollution_level: string;
+  temperature?: number;
+  humidity?: number;
+  pollen_count?: number;
+  uv_index?: number;
+  health_advisories: string[];
+  high_risk_conditions: string[];
+  recorded_at: string;
+  created_at: string;
+}
+
+export interface HealthTrend {
+  id: string;
+  patient_id: string;
+  metric_type: string;
+  metric_value: number;
+  unit: string;
+  is_abnormal: boolean;
+  recorded_at: string;
+  created_at: string;
+}
+
+export interface AuditLog {
+  id: string;
+  user_id?: string;
+  action: string;
+  resource_type: string;
+  resource_id?: string;
+  details?: any;
+  ip_address?: string;
+  user_agent?: string;
+  created_at: string;
+}
+
+export interface UserPreferences {
+  id: string;
+  user_id: string;
+  language: string;
+  accessibility_mode: boolean;
+  high_contrast: boolean;
+  large_text: boolean;
+  notification_preferences: any;
+  created_at: string;
+  updated_at: string;
+}

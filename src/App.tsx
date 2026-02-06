@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, Link, useNavigate } from 'react-router-dom';
-import { Sun, Moon, Menu, X, Search, Calendar, Users, FileText, Home, ChevronDown } from 'lucide-react';
+import { Sun, Moon, Menu, X, Search, Calendar, Users, FileText, Home, ChevronDown, Activity, Heart, Watch, AlertTriangle, Pill, Video } from 'lucide-react';
 import Logo from './components/Logo';
 import Login from './components/Login';
 import Signup from './components/Signup';
@@ -14,6 +14,12 @@ import QuickAccess from './components/QuickAccess';
 import Footer from './components/Footer';
 import ResetPassword from './components/ResetPassword';
 import UpdatePassword from './components/UpdatePassword';
+import AISymptomChecker from './components/AISymptomChecker';
+import AIHealthRiskScore from './components/AIHealthRiskScore';
+import WearableDeviceDashboard from './components/WearableDeviceDashboard';
+import EmergencyAlertSystem from './components/EmergencyAlertSystem';
+import AppointmentSystem from './components/AppointmentSystem';
+import MedicationReminder from './components/MedicationReminder';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { ThemeProvider, useTheme } from './contexts/ThemeContext';
 
@@ -74,43 +80,46 @@ function Navigation() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <div className="relative group">
-              <button className="flex items-center space-x-1 text-gray-600 hover:text-primary-500 transition-colors">
-                <span>Services</span>
+              <button className="flex items-center space-x-1 text-gray-600 dark:text-gray-300 hover:text-teal-500 dark:hover:text-teal-400 transition-colors">
+                <span>AI Health</span>
                 <ChevronDown className="w-4 h-4" />
               </button>
-              <div className="absolute top-full left-0 w-48 bg-white dark:bg-gray-800 shadow-lg rounded-md py-2 hidden group-hover:block">
-                <Link to="/services/consultations" className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-gray-700">
-                  Online Consultations
+              <div className="absolute top-full left-0 w-56 bg-white dark:bg-gray-800 shadow-lg rounded-md py-2 hidden group-hover:block z-50">
+                <Link to="/ai-symptom-checker" className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-teal-50 dark:hover:bg-gray-700 flex items-center space-x-2">
+                  <Activity className="w-4 h-4" />
+                  <span>AI Symptom Checker</span>
                 </Link>
-                <Link to="/services/diagnostics" className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-gray-700">
-                  Diagnostics
+                <Link to="/health-risk-score" className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-teal-50 dark:hover:bg-gray-700 flex items-center space-x-2">
+                  <Heart className="w-4 h-4" />
+                  <span>Health Risk Score</span>
                 </Link>
-                <Link to="/services/emergency" className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-gray-700">
-                  Emergency Care
+                <Link to="/wearable-dashboard" className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-teal-50 dark:hover:bg-gray-700 flex items-center space-x-2">
+                  <Watch className="w-4 h-4" />
+                  <span>Wearable Devices</span>
                 </Link>
               </div>
             </div>
-            <Link to="/doctors" className="text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">
-              Find Doctors
+            <Link to="/appointments" className="text-gray-600 dark:text-gray-300 hover:text-teal-500 dark:hover:text-teal-400 transition-colors flex items-center space-x-1">
+              <Calendar className="w-4 h-4" />
+              <span>Appointments</span>
             </Link>
-            <Link to="/facilities" className="text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">
-              Facilities
+            <Link to="/medications" className="text-gray-600 dark:text-gray-300 hover:text-teal-500 dark:hover:text-teal-400 transition-colors flex items-center space-x-1">
+              <Pill className="w-4 h-4" />
+              <span>Medications</span>
             </Link>
-            <Link to="/about" className="text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">
-              About Us
-            </Link>
-            <Link to="/contact" className="text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">
-              Contact
+            <Link to="/emergency-alerts" className="text-gray-600 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 transition-colors flex items-center space-x-1">
+              <AlertTriangle className="w-4 h-4" />
+              <span>Alerts</span>
             </Link>
             {session?.user ? (
               <>
-                <Link to="/dashboard" className="flex items-center space-x-2 text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">
+                <Link to="/dashboard" className="flex items-center space-x-2 text-gray-600 dark:text-gray-300 hover:text-teal-500 dark:hover:text-teal-400 transition-colors">
                   <FileText className="w-4 h-4" />
                   <span>Dashboard</span>
                 </Link>
                 <button
                   onClick={handleSignOut}
-                  className="btn-primary"
+                  className="px-4 py-2 bg-gradient-to-r from-teal-500 to-blue-600 text-white rounded-lg hover:from-teal-600 hover:to-blue-700 transition-all"
                 >
                   Sign Out
                 </button>
@@ -118,7 +127,7 @@ function Navigation() {
             ) : (
               <Link
                 to="/login"
-                className="btn-primary"
+                className="px-4 py-2 bg-gradient-to-r from-teal-500 to-blue-600 text-white rounded-lg hover:from-teal-600 hover:to-blue-700 transition-all"
               >
                 Sign In
               </Link>
@@ -214,7 +223,7 @@ function Navigation() {
 
 function AppContent() {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-teal-50 via-blue-50 to-cyan-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex flex-col">
       <Navigation />
       <main className="flex-grow">
         <Routes>
@@ -223,6 +232,18 @@ function AppContent() {
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/update-password" element={<UpdatePassword />} />
           <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+          
+          {/* AI Health Features - Public Access */}
+          <Route path="/ai-symptom-checker" element={<AISymptomChecker />} />
+          <Route path="/health-risk-score" element={<AIHealthRiskScore />} />
+          <Route path="/wearable-dashboard" element={<WearableDeviceDashboard />} />
+          
+          {/* Patient Management - Public Access */}
+          <Route path="/appointments" element={<AppointmentSystem />} />
+          <Route path="/medications" element={<MedicationReminder />} />
+          <Route path="/emergency-alerts" element={<EmergencyAlertSystem />} />
+          
+          {/* Legacy Routes */}
           <Route path="/services/*" element={<Services />} />
           <Route path="/doctors" element={<DoctorSearch />} />
           <Route path="/facilities" element={<Facilities />} />
