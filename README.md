@@ -2,6 +2,22 @@
 
 A production-ready, scalable healthcare management platform built with React, TypeScript, Tailwind CSS, Supabase, and TensorFlow.js. Features advanced AI-powered tools used in real hospitals and digital health platforms.
 
+## 🔐 Development Test Credentials
+
+For testing the application, you can use these credentials:
+
+### Doctor Login
+- **Email:** `doctor@test.com`
+- **Password:** `doctor123`
+- **Dashboard:** `/doctor-dashboard`
+
+### Patient Login
+- **Email:** `patient@test.com`
+- **Password:** `patient123`
+- **Dashboard:** `/patient-dashboard`
+
+**Note:** These are development credentials for prototype testing. In production, users must register through the signup pages.
+
 ## ✨ Key Features
 
 ### 🧠 AI & Health Intelligence
@@ -57,15 +73,26 @@ A production-ready, scalable healthcare management platform built with React, Ty
 ## 🗺️ Application Routes
 
 ### Public Routes
-- `/` - Home/Quick Access
-- `/login` - User authentication
-- `/signup` - New user registration
+- `/` - Landing page with user type selection
+- `/login` - Legacy user authentication
+- `/signup` - Legacy user registration
+- `/doctor-login` - Doctor authentication
+- `/doctor-signup` - Doctor registration
+- `/patient-login` - Patient authentication
+- `/patient-signup` - Patient registration
 - `/reset-password` - Password recovery
 - `/about` - About the platform
 - `/contact` - Contact information
 
 ### Protected Routes (Authentication Required)
-- `/dashboard` - Main patient dashboard
+
+#### Doctor Routes
+- `/doctor-dashboard` - Doctor dashboard with patient management
+- Manage appointments, prescriptions, and consultations
+- Access patient records and medical history
+
+#### Patient Routes
+- `/patient-dashboard` - Patient dashboard with health overview
 - `/ai-symptom-checker` - AI-powered symptom analysis
 - `/health-risk-score` - Health risk assessment tool
 - `/wearable-dashboard` - Wearable device data monitoring
@@ -73,7 +100,21 @@ A production-ready, scalable healthcare management platform built with React, Ty
 - `/medications` - Medication reminder tracker
 - `/emergency-alerts` - Emergency alert monitoring
 
-## 📦 New Components
+#### Legacy Routes
+- `/dashboard` - Original dashboard (maintained for compatibility)
+
+## 📦 Components
+
+### Authentication & User Management
+- [`LandingPage.tsx`](src/components/LandingPage.tsx) - Home page with user type selection
+- [`DoctorLogin.tsx`](src/components/DoctorLogin.tsx) - Doctor authentication
+- [`DoctorSignup.tsx`](src/components/DoctorSignup.tsx) - Doctor registration
+- [`PatientLogin.tsx`](src/components/PatientLogin.tsx) - Patient authentication
+- [`PatientSignup.tsx`](src/components/PatientSignup.tsx) - Patient registration
+
+### Dashboards
+- [`DoctorDashboard.tsx`](src/components/DoctorDashboard.tsx) - Doctor management interface
+- [`PatientDashboard.tsx`](src/components/PatientDashboard.tsx) - Patient health overview
 
 ### AI Features
 - [`AISymptomChecker.tsx`](src/components/AISymptomChecker.tsx) - Chat-based symptom checker
@@ -87,23 +128,25 @@ A production-ready, scalable healthcare management platform built with React, Ty
 
 ## 🗄️ Database Schema
 
-### New Tables (16 total)
-1. `user_roles` - Role-based access control
-2. `symptom_checker_history` - AI symptom logs
-3. `health_risk_scores` - Risk assessment results
-4. `wearable_data` - Smartwatch/fitness data
-5. `emergency_alerts` - Critical health alerts
-6. `ehr_records` - Electronic health records
-7. `ai_prescriptions` - AI prescription assistance
-8. `appointments` - Appointment scheduling
-9. `video_consultations` - Telemedicine sessions
-10. `diet_plans` - Nutrition planning
-11. `activity_plans` - Exercise recommendations
-12. `medication_reminders` - Medication schedules
-13. `environmental_health_data` - Environmental factors
-14. `health_trends` - Historical metrics
-15. `audit_logs` - System activity logs
-16. `user_preferences` - User settings
+### Tables (18 total)
+1. `user_roles` - Role-based access control (doctor/patient)
+2. `doctors` - Doctor profiles and credentials
+3. `patients` - Patient profiles and health information
+4. `symptom_checker_history` - AI symptom logs
+5. `health_risk_scores` - Risk assessment results
+6. `wearable_data` - Smartwatch/fitness data
+7. `emergency_alerts` - Critical health alerts
+8. `ehr_records` - Electronic health records
+9. `ai_prescriptions` - AI prescription assistance
+10. `appointments` - Appointment scheduling
+11. `video_consultations` - Telemedicine sessions
+12. `diet_plans` - Nutrition planning
+13. `activity_plans` - Exercise recommendations
+14. `medication_reminders` - Medication schedules
+15. `environmental_health_data` - Environmental factors
+16. `health_trends` - Historical metrics
+17. `audit_logs` - System activity logs
+18. `user_preferences` - User settings
 
 All tables include Row Level Security (RLS) policies for secure data access.
 

@@ -4,6 +4,13 @@ import { Sun, Moon, Menu, X, Search, Calendar, Users, FileText, Home, ChevronDow
 import Logo from './components/Logo';
 import Login from './components/Login';
 import Signup from './components/Signup';
+import DoctorLogin from './components/DoctorLogin';
+import PatientLogin from './components/PatientLogin';
+import DoctorSignup from './components/DoctorSignup';
+import PatientSignup from './components/PatientSignup';
+import DoctorDashboard from './components/DoctorDashboard';
+import PatientDashboard from './components/PatientDashboard';
+import LandingPage from './components/LandingPage';
 import Dashboard from './components/Dashboard';
 import Services from './components/Services';
 import DoctorSearch from './components/DoctorSearch';
@@ -228,10 +235,25 @@ function AppContent() {
       <Navigation />
       <main className="flex-grow">
         <Routes>
+          {/* Legacy Routes */}
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          
+          {/* Doctor Routes */}
+          <Route path="/doctor-login" element={<DoctorLogin />} />
+          <Route path="/doctor-signup" element={<DoctorSignup />} />
+          <Route path="/doctor-dashboard" element={<PrivateRoute><DoctorDashboard /></PrivateRoute>} />
+          
+          {/* Patient Routes */}
+          <Route path="/patient-login" element={<PatientLogin />} />
+          <Route path="/patient-signup" element={<PatientSignup />} />
+          <Route path="/patient-dashboard" element={<PrivateRoute><PatientDashboard /></PrivateRoute>} />
+          
+          {/* Password Reset */}
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/update-password" element={<UpdatePassword />} />
+          
+          {/* Dashboard - Legacy */}
           <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
           
           {/* AI Health Features - Public Access */}
@@ -251,7 +273,8 @@ function AppContent() {
           <Route path="/facilities" element={<Facilities />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/" element={<QuickAccess />} />
+          <Route path="/quick-access" element={<QuickAccess />} />
+          <Route path="/" element={<LandingPage />} />
         </Routes>
       </main>
       <Footer />
